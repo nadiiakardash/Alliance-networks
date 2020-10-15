@@ -58919,7 +58919,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 /*!*****************************!*\
   !*** ./src/js/animation.js ***!
   \*****************************/
-/*! no exports provided */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -58927,171 +58927,178 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var pixi_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! pixi.js */ "./node_modules/pixi.js/lib/pixi.es.js");
 
 
-function getRnd(min, max) {
-  return Math.floor(Math.random() * (max - min)) + min;
-}
+var createAnimation = function createAnimation() {
+  var can = document.getElementById("canvas");
+  if (!can) return;
 
-var app = new pixi_js__WEBPACK_IMPORTED_MODULE_0__["Application"]({
-  width: 1000,
-  height: 800,
-  transparent: true,
-  resolution: window.devicePixelRatio || 1
-});
-document.getElementById("canvas").appendChild(app.view); // transparent: true, backgroundColor: 0x1099bb,
-
-var container = new pixi_js__WEBPACK_IMPORTED_MODULE_0__["Container"](); // Create a new texture
-
-var texture = pixi_js__WEBPACK_IMPORTED_MODULE_0__["Texture"].from('img/computer.png');
-var computer = new pixi_js__WEBPACK_IMPORTED_MODULE_0__["Sprite"](texture); // computer.x = app.screen.width / 2;
-// computer.y = app.screen.height / 2;
-
-computer.width = 815;
-computer.height = 592;
-container.x = 0;
-container.y = 200;
-container.width = 815;
-container.height = 592; // Center bunny sprite in local container coordinates
-
-container.pivot.x = container.width / 2;
-container.pivot.y = container.height / 2;
-container.addChild(computer);
-app.stage.addChild(container); // Text
-
-var style = new pixi_js__WEBPACK_IMPORTED_MODULE_0__["TextStyle"]({
-  fontFamily: 'Arial',
-  fontSize: 16,
-  // fontStyle: 'italic',
-  // fontWeight: 'bold',
-  fill: '#2667FF' // gradient
-  // stroke: '#2667FF',
-  // strokeThickness: 5,
-  // dropShadow: true,
-  // dropShadowColor: '#000000',
-  // dropShadowBlur: 4,
-  // dropShadowAngle: Math.PI / 6,
-  // dropShadowDistance: 6,
-  // wordWrap: true,
-  // wordWrapWidth: 440,
-  // lineJoin: 'round'
-
-}); // const richText = new PIXI.Text('A', style);
-// richText.x = 50;
-// richText.y = 220;
-// app.stage.addChild(richText);
-
-var blurFilter1 = new pixi_js__WEBPACK_IMPORTED_MODULE_0__["filters"].BlurFilter(); // const graphics = new PIXI.Graphics();
-// // Rectangle
-// graphics.beginFill(0xDE3249);
-// graphics.drawRect(160, 340, 10, 10);
-// graphics.endFill();
-// // Rectangle
-// graphics.beginFill(0xDE3249);
-// graphics.drawRect(230, 640, 10, 10);
-// graphics.endFill();
-// app.stage.addChild(graphics);
-// const graphics = new PIXI.Graphics();
-// // Rectangle
-// graphics.beginFill(0xDE3249);
-// graphics.drawRect(600, 40, 10, 10);
-// graphics.endFill();
-// // Rectangle
-// graphics.beginFill(0xDE3249);
-// graphics.drawRect(900, 600, 10, 10);
-// graphics.endFill();
-// app.stage.addChild(graphics);
-
-var start = [[100, 230], [350, 680]];
-var end = [[600, 900], [40, 600]];
-var words = [':h', '&', 'this', '$', '{e}', '(0)', 'if', '!&'];
-var letters = [];
-
-function getSqrt(from, to) {
-  return from + (to - from);
-}
-
-function getSqrt2(from, to, pos) {
-  return from + (to - from) * pos;
-} // console.log(getSqrt2(200, 100, 0.2));
-
-
-function getPos(start, end, process) {
-  var x, y; // let st = 
-
-  return {
-    x: x,
-    y: y
-  };
-}
-
-function render() {
-  for (var i = 0; i < words.length; i++) {
-    var _container = new pixi_js__WEBPACK_IMPORTED_MODULE_0__["Container"]();
-
-    _container.rand = Math.random();
-    _container.rand1 = Math.random();
-    _container.rand2 = Math.random();
-    _container.obj = {
-      sx: getSqrt2(start[0][0], start[0][1], _container.rand),
-      sy: getSqrt2(start[1][0], start[1][1], _container.rand),
-      ex: getSqrt2(getRnd(400, 700), getRnd(700, 900), _container.rand),
-      ey: getSqrt2(getRnd(0, 100), getRnd(500, 700), _container.rand)
-    }; // console.log(container.obj);
-
-    var richText = new pixi_js__WEBPACK_IMPORTED_MODULE_0__["Text"](words[i], style); // container.x = container.obj.sx;
-    // container.y = container.obj.sy;
-
-    _container.addChild(richText);
-
-    _container.x = getSqrt2(_container.obj.sx, _container.obj.ex, _container.rand1);
-    _container.y = getSqrt2(_container.obj.sy, _container.obj.ey, _container.rand1);
-    app.stage.addChild(_container);
-    letters.push(_container);
+  function getRnd(min, max) {
+    return Math.floor(Math.random() * (max - min)) + min;
   }
-}
 
-for (var i = 0; i < 30; i++) {
-  render();
-}
-
-function runTextWay(x1, y1, x2, y2) {
-  return Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
-} // console.log(runTextWay(0, 0, 200, 100));
-
-
-var count = 0.1;
-app.ticker.add(function () {
-  // count += 0.005;
-  letters.forEach(function (thing) {
-    // thing.clear();
-    // thing.lineStyle(10, 0xff0000, 1);
-    // thing.beginFill(0xffFF00, 0.5);
-    var st = Math.sin(thing.rand1);
-
-    if (thing.rand1 >= 1) {
-      thing.rand1 = 0; // st = Math.sin(thing.rand1);
-    }
-
-    var t = thing.rand1; //Math.abs(st);
-    // console.log(t, thing.rand1);
-
-    thing.skew.x = 30;
-    thing.skew.y = 30;
-    thing.scale.x = t + 0.1;
-    thing.scale.y = t + 0.1;
-    var d = 0.8;
-
-    if (t > d) {
-      thing.alpha = 1 - (t - d) / (1 - d);
-    } else {
-      thing.alpha = 1;
-    } // thing.rotation = t * 360;
-
-
-    thing.x = getSqrt2(thing.obj.sx, thing.obj.ex, t);
-    thing.y = getSqrt2(thing.obj.sy, thing.obj.ey, t);
-    thing.rand1 += 0.0005; // thing.rotation = 36 * t;
+  var app = new pixi_js__WEBPACK_IMPORTED_MODULE_0__["Application"]({
+    width: 1000,
+    height: 800,
+    transparent: true,
+    resolution: window.devicePixelRatio || 1
   });
-});
+  document.getElementById("canvas").appendChild(app.view); // transparent: true, backgroundColor: 0x1099bb,
+
+  var container = new pixi_js__WEBPACK_IMPORTED_MODULE_0__["Container"](); // Create a new texture
+
+  var texture = pixi_js__WEBPACK_IMPORTED_MODULE_0__["Texture"].from('img/computer.png');
+  var computer = new pixi_js__WEBPACK_IMPORTED_MODULE_0__["Sprite"](texture); // computer.x = app.screen.width / 2;
+  // computer.y = app.screen.height / 2;
+
+  computer.width = 815;
+  computer.height = 592;
+  container.x = 0;
+  container.y = 200;
+  container.width = 815;
+  container.height = 592; // Center bunny sprite in local container coordinates
+
+  container.pivot.x = container.width / 2;
+  container.pivot.y = container.height / 2;
+  container.addChild(computer);
+  app.stage.addChild(container); // Text
+
+  var style = new pixi_js__WEBPACK_IMPORTED_MODULE_0__["TextStyle"]({
+    fontFamily: 'Arial',
+    fontSize: 16,
+    // fontStyle: 'italic',
+    // fontWeight: 'bold',
+    fill: '#2667FF' // gradient
+    // stroke: '#2667FF',
+    // strokeThickness: 5,
+    // dropShadow: true,
+    // dropShadowColor: '#000000',
+    // dropShadowBlur: 4,
+    // dropShadowAngle: Math.PI / 6,
+    // dropShadowDistance: 6,
+    // wordWrap: true,
+    // wordWrapWidth: 440,
+    // lineJoin: 'round'
+
+  }); // const richText = new PIXI.Text('A', style);
+  // richText.x = 50;
+  // richText.y = 220;
+  // app.stage.addChild(richText);
+
+  var blurFilter1 = new pixi_js__WEBPACK_IMPORTED_MODULE_0__["filters"].BlurFilter(); // const graphics = new PIXI.Graphics();
+  // // Rectangle
+  // graphics.beginFill(0xDE3249);
+  // graphics.drawRect(160, 340, 10, 10);
+  // graphics.endFill();
+  // // Rectangle
+  // graphics.beginFill(0xDE3249);
+  // graphics.drawRect(230, 640, 10, 10);
+  // graphics.endFill();
+  // app.stage.addChild(graphics);
+  // const graphics = new PIXI.Graphics();
+  // // Rectangle
+  // graphics.beginFill(0xDE3249);
+  // graphics.drawRect(600, 40, 10, 10);
+  // graphics.endFill();
+  // // Rectangle
+  // graphics.beginFill(0xDE3249);
+  // graphics.drawRect(900, 600, 10, 10);
+  // graphics.endFill();
+  // app.stage.addChild(graphics);
+
+  var start = [[100, 230], [350, 680]];
+  var end = [[600, 900], [40, 600]];
+  var words = [':h', '&', 'this', '$', '{e}', '(0)', 'if', '!&'];
+  var letters = [];
+
+  function getSqrt(from, to) {
+    return from + (to - from);
+  }
+
+  function getSqrt2(from, to, pos) {
+    return from + (to - from) * pos;
+  } // console.log(getSqrt2(200, 100, 0.2));
+
+
+  function getPos(start, end, process) {
+    var x, y; // let st = 
+
+    return {
+      x: x,
+      y: y
+    };
+  }
+
+  function render() {
+    for (var i = 0; i < words.length; i++) {
+      var _container = new pixi_js__WEBPACK_IMPORTED_MODULE_0__["Container"]();
+
+      _container.rand = Math.random();
+      _container.rand1 = Math.random();
+      _container.rand2 = Math.random();
+      _container.obj = {
+        sx: getSqrt2(start[0][0], start[0][1], _container.rand),
+        sy: getSqrt2(start[1][0], start[1][1], _container.rand),
+        ex: getSqrt2(getRnd(400, 700), getRnd(700, 900), _container.rand),
+        ey: getSqrt2(getRnd(0, 100), getRnd(500, 700), _container.rand)
+      }; // console.log(container.obj);
+
+      var richText = new pixi_js__WEBPACK_IMPORTED_MODULE_0__["Text"](words[i], style); // container.x = container.obj.sx;
+      // container.y = container.obj.sy;
+
+      _container.addChild(richText);
+
+      _container.x = getSqrt2(_container.obj.sx, _container.obj.ex, _container.rand1);
+      _container.y = getSqrt2(_container.obj.sy, _container.obj.ey, _container.rand1);
+      app.stage.addChild(_container);
+      letters.push(_container);
+    }
+  }
+
+  for (var i = 0; i < 30; i++) {
+    render();
+  }
+
+  function runTextWay(x1, y1, x2, y2) {
+    return Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
+  } // console.log(runTextWay(0, 0, 200, 100));
+
+
+  var count = 0.1;
+  app.ticker.add(function () {
+    // count += 0.005;
+    letters.forEach(function (thing) {
+      // thing.clear();
+      // thing.lineStyle(10, 0xff0000, 1);
+      // thing.beginFill(0xffFF00, 0.5);
+      var st = Math.sin(thing.rand1);
+
+      if (thing.rand1 >= 1) {
+        thing.rand1 = 0; // st = Math.sin(thing.rand1);
+      }
+
+      var t = thing.rand1; //Math.abs(st);
+      // console.log(t, thing.rand1);
+
+      thing.skew.x = 30;
+      thing.skew.y = 30;
+      thing.scale.x = t + 0.1;
+      thing.scale.y = t + 0.1;
+      var d = 0.8;
+
+      if (t > d) {
+        thing.alpha = 1 - (t - d) / (1 - d);
+      } else {
+        thing.alpha = 1;
+      } // thing.rotation = t * 360;
+
+
+      thing.x = getSqrt2(thing.obj.sx, thing.obj.ex, t);
+      thing.y = getSqrt2(thing.obj.sy, thing.obj.ey, t);
+      thing.rand1 += 0.0005; // thing.rotation = 36 * t;
+    });
+  });
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (createAnimation);
 
 /***/ }),
 
@@ -59108,10 +59115,223 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _bootstrap_js_bootstrap_min_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../bootstrap/js/bootstrap.min.js */ "./src/bootstrap/js/bootstrap.min.js");
 /* harmony import */ var _bootstrap_js_bootstrap_min_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_bootstrap_js_bootstrap_min_js__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _animation__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./animation */ "./src/js/animation.js");
 
 
 
-__webpack_require__(/*! ../js/animation.js */ "./src/js/animation.js");
+Object(_animation__WEBPACK_IMPORTED_MODULE_2__["default"])(); // require('../js/animation.js');
+
+__webpack_require__(/*! ../js/pages.js */ "./src/js/pages.js");
+
+jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).ready(function () {
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('.sort__by-category-position').click(function (event) {
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()('.sort__category-ul-position, .sort__by-category-position, .button-test-position').toggleClass('active');
+    var levelBtn = document.querySelector('.button-test-level');
+    var levelUlCat = document.querySelector('.sort__category-ul-level');
+    var LevelCat = document.querySelector('.sort__by-category-level');
+
+    if (levelUlCat.classList.contains('active')) {
+      levelUlCat.classList.toggle("active");
+      LevelCat.classList.toggle("active");
+      levelBtn.classList.toggle("active");
+    }
+
+    var TagBtn = document.querySelector('.button-test-tag');
+    var TagUlCat = document.querySelector('.sort__category-ul-tag');
+    var TagCat = document.querySelector('.sort__by-category-tag');
+
+    if (TagUlCat.classList.contains('active')) {
+      TagUlCat.classList.toggle("active");
+      TagCat.classList.toggle("active");
+      TagBtn.classList.toggle("active");
+    }
+  });
+});
+jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).ready(function () {
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('.sort__by-category-level').click(function (event) {
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()('.sort__category-ul-level, .sort__by-category-level, .button-test-level').toggleClass('active');
+    var positionBtn = document.querySelector('.button-test-position');
+    var positionUlCat = document.querySelector('.sort__category-ul-position');
+    var positionCat = document.querySelector('.sort__by-category-position');
+
+    if (positionCat.classList.contains('active')) {
+      positionUlCat.classList.toggle("active");
+      positionCat.classList.toggle("active");
+      positionBtn.classList.toggle("active");
+    }
+
+    var TagBtn = document.querySelector('.button-test-tag');
+    var TagUlCat = document.querySelector('.sort__category-ul-tag');
+    var TagCat = document.querySelector('.sort__by-category-tag');
+
+    if (TagUlCat.classList.contains('active')) {
+      TagUlCat.classList.toggle("active");
+      TagCat.classList.toggle("active");
+      TagBtn.classList.toggle("active");
+    }
+  });
+});
+jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).ready(function () {
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('.sort__by-category-tag').click(function (event) {
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()('.sort__category-ul-tag, .sort__by-category-tag, .button-test-tag').toggleClass('active');
+    var positionBtn = document.querySelector('.button-test-position');
+    var positionUlCat = document.querySelector('.sort__category-ul-position');
+    var positionCat = document.querySelector('.sort__by-category-position');
+
+    if (positionCat.classList.contains('active')) {
+      positionUlCat.classList.toggle("active");
+      positionCat.classList.toggle("active");
+      positionBtn.classList.toggle("active");
+    }
+
+    var levelBtn = document.querySelector('.button-test-level');
+    var levelUlCat = document.querySelector('.sort__category-ul-level');
+    var LevelCat = document.querySelector('.sort__by-category-level');
+
+    if (levelUlCat.classList.contains('active')) {
+      levelUlCat.classList.toggle("active");
+      LevelCat.classList.toggle("active");
+      levelBtn.classList.toggle("active");
+    }
+  });
+});
+var test = document.querySelector('.sort__category-ul-level');
+console.log(test); // visible tags block
+
+jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).ready(function () {
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('.sort__by-teg-req').click(function (event) {
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()('.sort__tags-block, .sort__by-teg-req').toggleClass('active');
+  });
+});
+jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).ready(function () {
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('.select-dropdown').click(function (event) {
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()(' .zmdi-chevron-down').toggleClass('active');
+  });
+}); // clear search form in page tags
+
+var clearSearch = document.getElementById('clearSearch');
+var searchInput = document.getElementById('searchInput');
+
+if (searchInput) {
+  var getClearSearch = function getClearSearch() {
+    searchInput.value = '';
+  };
+
+  // console.log(searchInput.value)
+  clearSearch.addEventListener('click', getClearSearch);
+} // vacancies form accordion
+
+
+document.addEventListener('DOMContentLoaded', createSelect, false);
+
+function createSelect() {
+  var select = document.getElementsByTagName('select'),
+      liElement,
+      ulElement,
+      optionValue,
+      iElement,
+      optionText,
+      selectDropdown,
+      elementParentSpan;
+
+  for (var select_i = 0, len = select.length; select_i < len; select_i++) {
+    //console.log('selects init');
+    select[select_i].style.display = 'none';
+    wrapElement(document.getElementById(select[select_i].id), document.createElement('div'), select_i, select[select_i].getAttribute('placeholder-text'));
+
+    for (var i = 0; i < select[select_i].options.length; i++) {
+      liElement = document.createElement("li");
+      optionValue = select[select_i].options[i].value;
+      optionText = document.createTextNode(select[select_i].options[i].text);
+      liElement.className = 'select-dropdown__list-item';
+      liElement.setAttribute('data-value', optionValue);
+      liElement.appendChild(optionText);
+      ulElement.appendChild(liElement);
+      liElement.addEventListener('click', function () {
+        displyUl(this);
+      }, false);
+    }
+  }
+
+  function wrapElement(el, wrapper, i, placeholder) {
+    el.parentNode.insertBefore(wrapper, el);
+    wrapper.appendChild(el);
+    document.addEventListener('click', function (e) {
+      var clickInside = wrapper.contains(e.target);
+
+      if (!clickInside) {
+        var menu = wrapper.getElementsByClassName('select-dropdown__list');
+        menu[0].classList.remove('active');
+      }
+    });
+    var buttonElement = document.createElement("button"),
+        spanElement = document.createElement("span"),
+        spanText = document.createTextNode(placeholder);
+    iElement = document.createElement("i");
+    ulElement = document.createElement("ul");
+    wrapper.className = 'select-dropdown select-dropdown--' + i;
+    buttonElement.className = 'select-dropdown__button select-dropdown__button--' + i;
+    buttonElement.setAttribute('data-value', '');
+    buttonElement.setAttribute('type', 'button');
+    spanElement.className = 'select-dropdown select-dropdown--' + i;
+    iElement.className = 'zmdi zmdi-chevron-down';
+    ulElement.className = 'select-dropdown__list select-dropdown__list--' + i;
+    ulElement.id = 'select-dropdown__list-' + i;
+    wrapper.appendChild(buttonElement);
+    spanElement.appendChild(spanText);
+    buttonElement.appendChild(spanElement);
+    buttonElement.appendChild(iElement);
+    wrapper.appendChild(ulElement);
+  }
+
+  function displyUl(element) {
+    if (element.tagName == 'BUTTON') {
+      selectDropdown = element.parentNode.getElementsByTagName('ul'); //var labelWrapper = document.getElementsByClassName('js-label-wrapper');
+
+      for (var i = 0, len = selectDropdown.length; i < len; i++) {
+        selectDropdown[i].classList.toggle("active"); //var parentNode = $(selectDropdown[i]).closest('.js-label-wrapper');
+        //parentNode[0].classList.toggle("active");
+      }
+    } else if (element.tagName == 'LI') {
+      var selectId = element.parentNode.parentNode.getElementsByTagName('select')[0];
+      selectElement(selectId.id, element.getAttribute('data-value'));
+      elementParentSpan = element.parentNode.parentNode.getElementsByTagName('span');
+      element.parentNode.classList.toggle("active");
+      elementParentSpan[0].textContent = element.textContent;
+      elementParentSpan[0].parentNode.setAttribute('data-value', element.getAttribute('data-value'));
+    }
+  }
+
+  function selectElement(id, valueToSelect) {
+    var element = document.getElementById(id);
+    element.value = valueToSelect;
+    element.setAttribute('selected', 'selected');
+  }
+
+  var buttonSelect = document.getElementsByClassName('select-dropdown__button');
+
+  for (var i = 0, len = buttonSelect.length; i < len; i++) {
+    buttonSelect[i].addEventListener('click', function (e) {
+      e.preventDefault();
+      displyUl(this);
+    }, false);
+  }
+}
+
+/***/ }),
+
+/***/ "./src/js/pages.js":
+/*!*************************!*\
+  !*** ./src/js/pages.js ***!
+  \*************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
+
 
 function burgerMenu(selector) {
   var menu = jquery__WEBPACK_IMPORTED_MODULE_0___default()(selector);
@@ -59273,6 +59493,24 @@ if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('*').is('.main-page')) {
 //    
 //   });
 //animation
+
+
+jquery__WEBPACK_IMPORTED_MODULE_0___default()(".btn-general").mouseover(function () {
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()(".under-btn").css("margin-top", "-56px");
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()(".under-btn").css("margin-left", "0px");
+});
+jquery__WEBPACK_IMPORTED_MODULE_0___default()(".btn-general").mouseout(function () {
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()(".under-btn").css("margin-top", "-44px");
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()(".under-btn").css("margin-left", "16px");
+});
+jquery__WEBPACK_IMPORTED_MODULE_0___default()(".btn-general2").mouseover(function () {
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()(".under-btn2").css("margin-top", "-56px");
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()(".under-btn2").css("right", "16px");
+});
+jquery__WEBPACK_IMPORTED_MODULE_0___default()(".btn-general2").mouseout(function () {
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()(".under-btn2").css("margin-top", "-44px");
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()(".under-btn2").css("right", "0px");
+});
 
 /***/ }),
 

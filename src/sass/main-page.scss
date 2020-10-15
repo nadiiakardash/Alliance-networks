@@ -186,6 +186,7 @@ header {
 
         &:hover {
             background: #2667ff;
+            
         }
     }
 }
@@ -199,12 +200,50 @@ header {
     margin-top: -44px;
     margin-left: 16px;
     z-index: 1;
+    transition: 0.5s ease;
+}
+
+.scroll-text{
+    transform: rotate(90deg);
+    margin-top:160px ;
+   width: 10px;
+   position: absolute;
+   animation: scroll 1.5s linear infinite alternate ;
+   
+   
+p{
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 18px;
+    color: #2667FF;
+    position: absolute;
+}
+    hr{
+        position: absolute;
+        height:2px;
+        margin-left: 53px;
+        margin-top: 10px;
+       
+        border: none;
+        background: #2667FF;
+        width:  92px;
+        // transform: rotate(90deg);
+       
+    }
 }
 
 
 
+@keyframes scroll {
+    0% {
+        margin-top: 160px;
+    }
 
-
+  
+    100% {
+        margin-top: 180px;
+    }
+}
 
 
 
@@ -358,8 +397,47 @@ header {
     background-position-x: right;
     background-repeat: no-repeat;
     background-image: url(../../img/bg-section2.png);
+    
 }
-
+.blue-eclipse{
+position: absolute;
+width: 25px;
+height: 25px;
+background: #cae4fe;
+border-radius: 50%;
+ margin-top: 160px;
+ margin-left: 117%;
+}
+ 
+.line1{
+    position: absolute;
+    height: 1369px;
+width: 2px;
+border: none;
+background: #edf6ff;
+}
+.line2{
+    margin-left: 298px;
+    z-index: -1;
+    background: linear-gradient(#edf6ff 88%, #fcfdff);
+    height: 1499px;
+}
+.line3{
+    margin-left: 588px;
+    height:1309px;
+    margin-top: 600px;
+    background: linear-gradient(#edf6ff 93%, #fcfdff);
+}
+.line4{
+ right: 35%;
+   margin-top: 600px;
+ 
+}
+.line5{
+    right: 12.3%;
+      margin-top: 600px;
+    
+   }
 .we-do-text {
     padding-top: 360px;
 
@@ -374,6 +452,8 @@ header {
     }
 
     h2 {
+        position: relative;
+        z-index: 2;
         font-weight: bold;
         font-size: 54px;
         line-height: 48px;
@@ -390,6 +470,8 @@ header {
     }
 
     p {
+        position: relative;
+        z-index: 2;
         width: 340px;
         font-family: Roboto;
         font-style: normal;
@@ -712,8 +794,33 @@ header {
 .svg-pink-ecl{
     position: absolute;
     margin-top: 300px;
+    left: 19%;
+}
+.svg-if{
+    position: absolute;
+    right: 21%;
+    margin-top: 25px;
 }
 @media (max-width: 1750px) {
+    .line1{
+        height: 1209px;
+    }
+.scroll-text{
+ margin-top: 90px;
+ margin-left: 110px;
+}
+@keyframes scroll {
+    0% {
+        margin-top: 90px;
+    }
+
+  
+    100% {
+        margin-top: 100px;
+    }
+}
+
+
     .we_do {
         margin-top: 180px;
 
@@ -741,6 +848,10 @@ header {
 }
 
 @media (max-width: 1585px) {
+    .scroll-text{
+        margin-top: 90px;
+        margin-left: 60px;
+       }
     .svg-e{
    
         right: 20px;
@@ -807,6 +918,15 @@ header {
 }
 
 @media (max-width: 1228px) {
+    .line3{
+        margin-left: 40% ;
+    }
+    .line2{
+        margin-left: 30% ;
+    }
+   .we-do-text h2 svg{
+    margin-left: 207px;
+    }
     .general-text {
 
         margin-top: 60px;
@@ -820,9 +940,29 @@ header {
 }
 
 @media (max-width: 1199.98px) {
+    .blue-eclipse{
+ margin-top: -20px;
+ margin-left: 47%;
+}
+    .scroll-text{
+        margin-top: 47px;
+        margin-left: 60px;
+  
+       }
+       @keyframes scroll {
+        0% {
+            margin-top: 47px;
+        }
+    
+      
+        100% {
+            margin-top: 57px;
+        }
+    }
+    
     .svg-e{
    
-        right: 20px;
+   right: 20px;
    margin-top: 890px;
     }
     .logotip {
@@ -882,7 +1022,7 @@ header {
         }
     }
     .we_do {
-        margin-top: 150px;
+        margin-top: 240px;
 margin-left: auto;
 //  margin-right: auto;
         background-image: none;
@@ -949,6 +1089,16 @@ margin-left: auto;
 }
 
 @media (max-width: 992px) {
+    .line3{
+        display: none;
+    }
+ 
+    .we_do {
+        margin-top: 100px;
+}
+    .scroll-text{
+        display: none;
+       }
     .animation {
         margin-top: 120px;
         right: 50px;
